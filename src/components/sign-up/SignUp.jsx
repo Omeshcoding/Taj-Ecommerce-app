@@ -31,9 +31,17 @@ class SignUp extends React.Component{
         }
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email, password);
-            createUsetProfileDocument(user, { displayName });
+
+            await createUsetProfileDocument(user, { displayName });
+            
+            this.setState({
+            displayName: '',
+            email: '',
+            password: '',
+            confirmPassword: ''               
+            })
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
 
     };
